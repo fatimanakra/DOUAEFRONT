@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../../customer/customer-services/customer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { catchError, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AdminService } from '../../admin-services/admin.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,25 +17,30 @@ export class DashboardComponent implements OnInit {
   isSpinning: boolean = false;
   noCategoriesFound: boolean = false;
 
-  constructor(private service: CustomerService, private fb: FormBuilder,private router: Router,private adminService: AdminService) {}
+  constructor(
+    private service: CustomerService,
+    private fb: FormBuilder,
+    private router: Router,
+    private adminService: AdminService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      title: ['', Validators.required],  // Assurez-vous que le champ est non-null au début
+      title: ['', Validators.required],
     });
 
-    // Récupère toutes les catégories initialement
     this.getAllCategories();
 
-    // Écoute les changements du champ 'title'
     this.validateForm.get('title').valueChanges.pipe(
-      debounceTime(300),        // Attend 300ms après le dernier événement avant de lancer la recherche
-      distinctUntilChanged()    // Lance la recherche seulement si la valeur a changé
+      debounceTime(300),
+      distinctUntilChanged()
     ).subscribe(value => {
       this.isSpinning = true;
       if (value) {
         this.service.getAllCategoriesByTitle(value).subscribe({
           next: (res) => {
+            this.isSpinning = false;
             if (res.length === 0) {
               this.noCategoriesFound = true;
               this.categories = [];
@@ -42,16 +48,17 @@ export class DashboardComponent implements OnInit {
               this.noCategoriesFound = false;
               this.categories = res;
             }
-            this.isSpinning = false;
           },
           error: () => {
             this.isSpinning = false;
-            alert('Erreur lors de la récupération des données');
+            this.noCategoriesFound = true;
+            this.categories = [];
+           
           }
         });
       } else {
         this.noCategoriesFound = false;
-        this.getAllCategories(); // Si aucun texte n'est entré, affiche toutes les catégories
+        this.getAllCategories();
       }
     });
   }
@@ -64,50 +71,52 @@ export class DashboardComponent implements OnInit {
     this.isSpinning = true;
     this.service.getAllCategoriesByTitle(title).subscribe({
       next: (res) => {
-        this.categories = res;
         this.isSpinning = false;
+        if (res.length === 0) {
+          this.noCategoriesFound = true;
+          this.categories = [];
+        } else {
+          this.noCategoriesFound = false;
+          this.categories = res;
+        }
       },
       error: () => {
         this.isSpinning = false;
-        alert('Erreur lors de la récupération des données');
+        this.noCategoriesFound = true;
+        this.categories = [];
+       
       }
     });
   }
 
-
-  
-
-  getAllCategories() {
-    this.categories= [];
+  getAllCategories(): void {
     this.service.getAllCategories().subscribe((res) => {
-      this.categories = res; // Assignez les données récupérées à la variable categories
-      console.log(this.categories);
+      this.categories = res;
     });
   }
 
-
-
-  
-  approveAndPostCategory(categoryId: number) {
+  approveAndPostCategory(categoryId: number): void {
     this.adminService.approveCategory(categoryId).pipe(
+      tap(approvalResponse => {
+        console.log('Catégorie approuvée avec succès:', approvalResponse);
+      }),
       catchError(approvalError => {
         console.error('Erreur lors de l\'approbation de la catégorie:', approvalError);
-        throw approvalError; // Renvoyer l'erreur pour la gestion ultérieure
+        throw approvalError;
       })
     ).subscribe(approvalResponse => {
-      console.log('Catégorie approuvée avec succès:', approvalResponse);
-  
       this.adminService.sendCategory(approvalResponse.id).pipe(
+        tap(postResponse => {
+          console.log('Catégorie postée avec succès:', postResponse);
+          this.snackBar.open("Success: Category approved and posted successfully", "Close", {
+            duration: 5000,
+            panelClass: ['snackbar-success']
+          });
+        }),
         catchError(postError => {
           console.error('Erreur lors de la post de la catégorie:', postError);
-          throw postError; // Renvoyer l'erreur pour la gestion ultérieure
+          throw postError;
         })
-      ).subscribe(postResponse => {
-        console.log('Catégorie postée avec succès:', postResponse);
-        // Peut-être que vous devez effectuer d'autres actions après avoir approuvé et posté la catégorie
-      });
+      ).subscribe();
     });
-  
-  }
-  
-}
+  }}

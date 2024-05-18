@@ -126,11 +126,11 @@
     padding: 20px;
     margin-top: 100px;
     margin-bottom: 20px;
-    width: 50%;
-    margin-right: 10px; /* Espacement entre les annonces horizontales */
-    margin-left: 10px; /* Espacement entre les annonces horizontales */
+    width: 80%;
+    margin-right: 140px; /* Espacement entre les annonces horizontales */
+    margin-left: 140px; /* Espacement entre les annonces horizontales */
 background-color: #fdfaf8;
-    max-width: 300px; /* Ajustez la largeur maximale selon vos besoins */
+    max-width: 600px; /* Ajustez la largeur maximale selon vos besoins */
   }
   
   .job-card h2 {
@@ -154,6 +154,7 @@ background-color: #fdfaf8;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-top: 170px;
   }
   
   .maroc-card {
@@ -162,11 +163,11 @@ background-color: #fdfaf8;
     padding: 20px;
     margin-top: 100px;
     margin-bottom: 20px;
-    width: 80%;
-    margin-right: 140px; /* Espacement entre les annonces horizontales */
-    margin-left: 140px; /* Espacement entre les annonces horizontales */
+    width: 50%;
+    margin-right: 10px; /* Espacement entre les annonces horizontales */
+    margin-left: 10px; /* Espacement entre les annonces horizontales */
 background-color: #fdfaf8;
-    max-width: 600px; 
+    max-width: 300px; 
   }
   .maroc-card h2 {
     font-size: 1.5rem;
@@ -228,7 +229,7 @@ background-color: #fdfaf8;
     z-index: -1; /* Assurez-vous que l'image de fond est en arrière-plan */
 }
 .cont {
-    margin-top: -300px;
+    margin-top: -250px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -300,5 +301,3 @@ background-color: #fdfaf8;
     border-radius: 10px;
     width: 50%;
 }
-
-

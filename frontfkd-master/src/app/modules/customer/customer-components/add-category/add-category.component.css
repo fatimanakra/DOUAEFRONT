@@ -1,6 +1,6 @@
 .parent {
     width: 100%;
-    min-height: 100vh;
+    min-height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,10 +10,11 @@
 .child {
     padding: 50px;
     width: 100%;
-    max-width: 680px;
+    max-width: 600px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    
 }
 
 .imeDiv {

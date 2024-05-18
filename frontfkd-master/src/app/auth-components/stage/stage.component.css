@@ -229,7 +229,7 @@ background-color: #fdfaf8;
   z-index: -1; /* Assurez-vous que l'image de fond est en arrière-plan */
 }
 .cont {
-  margin-top: -400px;
+  margin-top: -200px;
   display: flex;
   justify-content: center;
   align-items: center;

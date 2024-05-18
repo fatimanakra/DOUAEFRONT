@@ -14,7 +14,7 @@ export class EmploiService {
     constructor(private http: HttpClient) { }
   
     getJobs(): Observable<any[]> {
-      const scrapeUrl = `${this.apiUrl}scrape`; // Ajoutez /scrape à l'URL de base
+      const scrapeUrl = `${this.apiUrl}scrapeThreePages`; // Ajoutez /scrape à l'URL de base
       return this.http.get<any[]>(scrapeUrl);
     }
 

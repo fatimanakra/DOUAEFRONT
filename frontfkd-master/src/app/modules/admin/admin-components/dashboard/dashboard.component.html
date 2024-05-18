@@ -11,34 +11,33 @@
         <form [formGroup]="validateForm" (ngSubmit)="submitForm()">
             <input nz-input placeholder="Enter Keyword to search" style="width: 20%;" formControlName="title" />
             <button nz-button nzType="primary" style="margin-left: 15px;" [disabled]="validateForm.invalid">Rechercher</button>
-          </form>
-          <div *ngIf="noCategoriesFound" style="margin-top: 10px; color: red;">Aucune catégorie trouvée.</div>
+        </form>
+        
+        <div *ngIf="noCategoriesFound" style="margin-top: 10px; color: rgb(20, 19, 19);">
+            Aucun offre trouvé!
+        </div>
         
         <!-- Tableau des catégories -->
-     <!-- Tableau des annonces -->
-<table *ngIf="categories.length > 0">
-    <thead>
-        <tr>
-            <th>Nom de la catégorie</th>
-            <th>Description</th>
-            <th>Adresse Email</th>
-
-            <th>Décision</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let category of categories">
-            <td>{{ category.name }}</td>
-            <td>{{ category.description }}</td>
-            <td>{{ category.email }}</td>
-
-            <td>
-                <button class="btn-validate" (click)=" approveAndPostCategory(category.id)">Approuver</button>
-
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
-
+        <table *ngIf="!noCategoriesFound && categories.length > 0" style="margin-top: 20px; width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Nom de la catégorie</th>
+                    <th>Description</th>
+                    <th>Adresse Email</th>
+                    <th>Décision</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories">
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                    <td>{{ category.email }}</td>
+                    <td>
+                        <button class="btn-validate" (click)="approveAndPostCategory(category.id)">Approuver</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -49,7 +49,7 @@ a.mat-button:hover {
   background-color: #1565c0; /* Couleur de fond au survol */
 }
 table {
-  width: 100%;
+  width: 50%;
   border-collapse: collapse;
   margin-top: 20px; /* Espace entre la barre de recherche et le tableau */
 }
@@ -74,7 +74,7 @@ th {
   border-radius: 5px;
   margin-left: 550px;
   margin-right: 550px;
-  margin-top: -200px;
+  margin-top: -300px;
 }
 
 .search-bar .input-group {
@@ -123,14 +123,14 @@ th {
 .category-list {
   display: flex;
   flex-wrap: wrap;
-  margin-top: -300px;
+  margin-top: -450px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 20px;
 }
 
 .category-card {
-  width: 400px;
+  width: 300px;
   height: 300px;
   margin: 10px;
   padding: 20px;

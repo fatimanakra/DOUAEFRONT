@@ -1,25 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { EmploiService } from './emploi-services/emploi.service';
+import { EmploiService } from '../emploi/emploi-services/emploi.service';
 import { Subscription } from 'rxjs';
 import { Maroc } from '../../maroc.model';
-import { FavorisService } from '../favoris/favoris-services/favoris.service';
 
 @Component({
-  selector: 'app-emploi',
-  templateUrl: './emploi.component.html',
-  styleUrls: ['./emploi.component.css']
+  selector: 'app-scrape',
+  templateUrl: './scrape.component.html',
+  styleUrl: './scrape.component.css'
 })
-
-export class EmploiComponent implements OnInit {
-
-
+export class ScrapeComponent implements OnInit {
   jobs: any[];
   subscription: Subscription;
   annouces: any[];
   marocList: Maroc[];
-favorites: any;
 
-  constructor(private emploiService: EmploiService , private favorisService: FavorisService) { }
+  constructor(private emploiService: EmploiService) { }
 
   ngOnInit(): void {
     this.fetchMaroc();
@@ -59,10 +54,4 @@ favorites: any;
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
-  toggleFavorite(job: any) {
-    this.favorisService.toggleFavorite(job);
-  }
-
-  
 }

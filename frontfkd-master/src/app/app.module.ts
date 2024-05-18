@@ -23,6 +23,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EmploiComponent } from './auth-components/emploi/emploi.component';
 import { StageComponent } from './auth-components/stage/stage.component';
+import { ScrapeComponent } from './auth-components/scrape/scrape.component';
+import { FavorisComponent } from './auth-components/favoris/favoris.component';
 
 
 @NgModule({
@@ -30,7 +32,7 @@ import { StageComponent } from './auth-components/stage/stage.component';
     AppComponent,
     SignupComponent,
     LoginComponent,DemandeComponent,HomeComponent,
-    EmploiComponent,StageComponent
+    EmploiComponent,StageComponent,ScrapeComponent,FavorisComponent
   ],
   imports: [
     BrowserModule,

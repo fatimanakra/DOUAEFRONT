@@ -7,6 +7,7 @@ import { StageComponent } from './auth-components/stage/stage.component';
 import { DemandeComponent } from './auth-components/demande/demande.component';
 import { AddCategoryComponent } from './modules/customer/customer-components/add-category/add-category.component';
 import { HomeComponent } from './auth-components/home/home.component';
+import { ScrapeComponent } from './auth-components/scrape/scrape.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -20,7 +21,7 @@ const routes: Routes = [
 
   {path:':categoryId/demande',component:DemandeComponent},
   { path: 'add-category', component: AddCategoryComponent },
-  { path: 'scrape', component: AddCategoryComponent },
+  { path: 'scrape', component: ScrapeComponent },
 
   {path: "admin",loadChildren: ()=> import ("./modules/admin/admin.module").then(m=>m.AdminModule)},
   {path: "customer",loadChildren: ()=> import ("./modules/customer/customer.module").then(m=>m.CustomerModule)}

@@ -41,32 +41,33 @@
 
 
   <div class="job-container">
-
     <div class="job-card" *ngFor="let job of jobs">
       <h2 style="font-size: 22px;">{{ job.Titre }}</h2>
       <p>{{ job.Description }}</p>
-      <p style="color: blue; font-size: 20px;">Ville :</p><p> {{ job['Ville de l\'entreprise'] }}</p>
-      <p style="color: blue; font-size: 20px;">Date de publication : </p><p>{{ job['Date de publication'] }}</p>
+      <p style="color: blue; font-size: 20px;">Ville :</p>
+      <p>{{ job['Ville de l\'entreprise'] }}</p>
+      <p style="color: blue; font-size: 20px;">Date de publication : </p>
+      <p>{{ job['Date de publication'] }}</p>
+      <button (click)="toggleFavorite(job)" class="favorite-button">
+        <i class="fa fa-heart"></i> <!-- Icône de favori -->
+      </button>
+      <button  class="share-button">
+        <i class="fa fa-share"></i> <!-- Icône de partage -->
+      </button>
     </div>
   </div>
   
 
 
-  <div class="maroc-container">
-    <div class="maroc-card" *ngFor="let annouce of annouces">
-      <h2>{{ annouce.title }}</h2>
-      <p>{{ annouce.description }}</p>
-      <p>{{ annouce.location }}</p>
-    </div>
-  </div>
+ 
   
 
 
 
   <div class="cont">
     <a  nzType="link" routerLink="/emploi" routerLinkActive="active" class="button ">1</a>
-    <a nzType="link" routerLink="/stage" routerLinkActive="active" class="button active ">2</a>
-    <a href="page3.html" class="button">3</a>
+    <a nzType="link" routerLink="/scrape" routerLinkActive="active" class="button active ">2</a>
+    <a nzType="link" routerLink="/stage" routerLinkActive="active" class="button active ">3</a>
   </div>
   
 
@@ -78,27 +79,3 @@
 
 
 </div>
-<footer class="footer">
-  <div class="footer-content">
-      <div class="footer-left">
-          <h2 style="font-size: 40px; margin-left: 100px;  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Jobing</h2>
-          <p style="font-size: 26px; margin-left: 25px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;margin-top: -12px;">Find jobs & internships</p>
-          <p style="margin-left: 100px;"> &copy; 2024 Jobing</p>
-
-       
-
-        
-          
-      </div>
-     
-
-      <div class="footer-right">
-        <div class="socialicons">
-            <a href="#"><i class="fab fa-facebook fa-3x icon-light" style="margin-right: 100px;"></i></a>
-            <a href="#"><i class="fab fa-instagram fa-3x icon-light" style="margin-right: 100px;"></i></a>
-            <a href="#"><i class="fab fa-linkedin fa-3x icon-light" style="margin-right: 100px;"></i></a>
-        </div>
-    </div>
-    
-  </div>
-</footer>
